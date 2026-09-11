@@ -22,18 +22,19 @@ get_security_list_response = core_client.get_security_list(
 egress_security_rules = get_security_list_response.data.egress_security_rules
 ingress_security_rules = get_security_list_response.data.ingress_security_rules
 
-add_ingress_security_rule = oci.core.models.IngressSecurityRule(
-                protocol="6",
-                source="80.80.80.0/24",
-                is_stateless=False,
-                source_type="CIDR_BLOCK",
-                tcp_options=oci.core.models.TcpOptions(
-                    destination_port_range=oci.core.models.PortRange(
-                        max=4000,
-                        min=4000),
-                    ))
+for x in range(80):
+    add_ingress_security_rule = oci.core.models.IngressSecurityRule(
+                    protocol="6",
+                    source="80.80.80.0/24",
+                    is_stateless=False,
+                    source_type="CIDR_BLOCK",
+                    tcp_options=oci.core.models.TcpOptions(
+                        destination_port_range=oci.core.models.PortRange(
+                            max=4000,
+                            min=4000),
+                        ))
 
-ingress_security_rules.append(add_ingress_security_rule)
+    ingress_security_rules.append(add_ingress_security_rule)
 
 
 
